@@ -1,0 +1,44 @@
+<div class="card border-primary mb-3">
+	<div class="card-header">Perfiles</div>
+	<div class="card-body text-primary">
+		<h5 class="card-title">Listado de perfiles</h5>
+		<div class="my-2 text-left">
+			<button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/perfil/formulario']">Crear perfil</button>
+		</div>
+		<table class="table table-bordered table-striped text-center">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
+					<th>Fecha de Nacimiento</th>
+        			<th>Edad</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+          			<th>Detalle</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let perfil of perfiles">
+					<td>{{ perfil.userId }}</td>
+					<td>{{ perfil.nombre }}</td>
+					<td>{{ perfil.apePaterno }}</td>
+					<td>{{ perfil.apeMaterno }}</td>
+					<td>{{ perfil.fechaNacimiento |  date:'dd/MM/yyyy' }}</td>
+         			<td>{{ perfil.edad }}</td>
+					<td>
+						<button type="button" name="editar"	[routerLink]="['/perfil/formulario', perfil.userId]" class="btn btn-primary btn-sm">Editar</button>
+					</td>
+					<td>
+						<button type="button" name="eliminar" (click)='delete(perfil)' class="btn btn-danger btn-sm">Eliminar</button>
+					</td>
+          			<td>
+       				    <button type="button" class="btn btn-primary" (click)='detalle(perfil)'>Ver Detalle</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>

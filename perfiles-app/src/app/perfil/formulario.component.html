@@ -1,0 +1,82 @@
+<div class="card  border-primary ">
+	<div class="card-header">{{ titulo | uppercase }}</div>
+	<div class="card-body text-primary col-xs-8">
+
+		<form>
+			<div class="form-group row">
+				<label for="nombre" class="col-form-label col-sm-3">Nombre*</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" [(ngModel)]="perfil.nombre"	name="nombre" #nombre="ngModel" required maxlength="15"> 
+						<span *ngIf="!nombre.valid && nombre.touched">
+						<div class="alert alert-danger" role="alert">
+  							<strong>Warning!</strong> El nombre es obligatorio
+						</div>
+						</span>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="apePaterno" class="col-form-label col-sm-3">Apellido Paterno*</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control"	[(ngModel)]="perfil.apePaterno" name="apePaterno" #apePaterno="ngModel" required maxlength="15">
+					<span *ngIf="!apePaterno.valid && apePaterno.touched">
+						<div class="alert alert-danger" role="alert">
+  							<strong>Warning!</strong> El apellido paterno es obligatorio
+						</div>
+					</span>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="apeMaterno" class="col-form-label col-sm-3">Apellido Materno</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" [(ngModel)]="perfil.apeMaterno" name="apeMaterno" #apeMaterno="ngModel" maxlength="15">
+				</div>
+			</div>
+
+
+			<div class="form-group row">
+				<label for="fechaNacimiento" class="col-form-label col-sm-3">Fecha de Nacimiento</label>
+				<div class="col-sm-6">
+					<input type="date" class="form-control" [(ngModel)]="perfil.fechaNacimiento" name="fechaNacimiento" >
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="edad" class="col-form-label col-sm-3">Edad</label>
+				<div class="col-sm-6">
+					<input type="number" class="form-control" [(ngModel)]="perfil.edad" name="edad" #edad="ngModel" maxlength="3" min="13" max="120">
+					<span *ngIf="!edad.valid && edad.touched">El nombre es obligatorio</span>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<button class="btn btn-primary" role="button" (click)='createPerfil()' *ngIf="!perfil.userId else elseBlock" [disabled]="!perfil.nombre || !perfil.apePaterno">Agregar Perfil</button>
+
+					<ng-template #elseBlock>
+					<button class="btn btn-primary" role="button" (click)='update()' [disabled]="!perfil.nombre || !perfil.apePaterno">Editar Perfil</button>
+					</ng-template>
+					
+					<button class="btn btn-primary" role="button" routerLink="/perfil">Regresar</button>
+				</div>
+			</div>
+		
+		</form>
+		
+		
+
+	</div>
+	
+	<div class="col-xs-12">
+		<img src="{{perfil.foto}}" height="200" class="img-fluid" >
+	</div>
+	
+    <div class="form-group">
+    	<label for="file">Choose File</label>
+    	<input type="file" id="file" (change)="handleFileInput($event.target.files)">
+	</div>
+        
+</div>
+	
+	
